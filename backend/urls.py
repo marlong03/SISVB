@@ -18,10 +18,14 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 from django.views.generic import TemplateView
 from rest_framework.authtoken.views import obtain_auth_token
+from appadministrador.views import LoginView,LogoutView,UserInfoView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('api/login/', LoginView.as_view(), name='login'),
+     path('api/logout/', LogoutView.as_view(), name='logout'),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'), 
+     path('user-info/', UserInfoView.as_view(), name='user_info'),
     path('api/', include('appadministrador.urls')),
     re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]
